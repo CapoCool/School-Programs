@@ -35,12 +35,15 @@ public class AuthoringAssistant {
 	//returns length of characters minus whitespace
 	public static int getNumOfNonWSCharacters(final String usrStr) {
 		
+		//uses regex replace all method to remove all whitespace and then
+		//count the characters
 		return usrStr.trim().replaceAll(" +", "").length();
 	}
 	
 	//returns number of words minus whitespace
 	public static int getNumOfWords(final String usrStr) {
 		 
+		
 		String[] words = usrStr.split("\\s+"); //removes whitespace and stores into an array
 		return words.length;
 		
@@ -49,12 +52,14 @@ public class AuthoringAssistant {
 	//replaces all exclamation points with periods
 	public static String replaceExclamation(final String usrStr) {
 		
+		//uses regex replace all method to replace ! to .
         return usrStr.replaceAll("!", ".");
 	}
 	
 	//removes excess spaces in a string
 	public static String shortenSpace(final String usrStr) {
 		
+		//uses trim and replace all to find the excess spaces and then just replaces them with a single space
 		return usrStr.trim().replaceAll(" +", " ");
 		
 	}
@@ -62,6 +67,8 @@ public class AuthoringAssistant {
 	public static int findText(String toFind, String usrStr) {
 		int count = 0;
 		
+		//uses regex classes to find the word, no matter the case format and returns the number of times the 
+		//word was uses
 		Pattern p = Pattern.compile("\\b"+toFind+"\\b", Pattern.CASE_INSENSITIVE);
 		Matcher m = p.matcher(usrStr);
 		while(m.find()){
@@ -74,9 +81,9 @@ public class AuthoringAssistant {
 	
 	public static void main(String[] args) {
 		 
-		 char menuChoice;
-		 String input;
-		 String toFind;
+		 char menuChoice; // for the menu choice character
+		 String input;// stores initial string to be passed into methods for use
+		 String toFind; //stores word to be found, passes to method, and displays the word.
 		 
 		 System.out.println("Enter a sample text:");
 		 input = scanner.nextLine();
