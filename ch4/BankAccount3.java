@@ -1,12 +1,9 @@
-/* Class Name: The BankAccount class - UPDATE 3
-   Author:  P Baker / P Jalowiec
-	Date : 2011
+/* Class Name: CSC205
+   Author: Dillan Poorman
+	Date : 09/5/2019
 	Brief Description:
-
-    Add overloaded methods.  constructor and withdraw
-	 
-    Add static variable count to count the number of objects created
-	 Add static method getCount to return the count
+	
+	Bank account I wrote in my CSC110 class.  
     
  */
 package ch4;
@@ -15,16 +12,14 @@ import java.text.NumberFormat;  //using currency format in toString
 
 
 
-class BankAccount3 
+public class BankAccount3 
 {
-
-    private static int count = 0;   //class to count accounts
   
-	private int acctNumber;
-    private double balance;
-    private String name;
+	protected int acctNumber;
+    protected double balance;
+    protected String name;
 	
-    private static int acctCount = 0;
+    protected static int acctCount = 0;
 	 
     
     /* constructs a bank account with zero balance and account number,
@@ -37,7 +32,7 @@ class BankAccount3
 		 balance = 0.0;
 		 name = "Dillan Poorman";
 		 
-		 count++;
+		 acctCount++;
 	 }
 	 
 	 /*constructs a bank account with an account number, initial balance, and owner*/
@@ -47,7 +42,7 @@ class BankAccount3
 		 balance = initBalance;
 		 name = owner;
 		 
-		 count++;
+		 acctCount++;
 	 }
 	
     //all of the mutator methods - set
@@ -58,10 +53,10 @@ class BankAccount3
     }
 
  	//not appropriate.  would not want to reset a balance  
-	/*public void setBalance(double amount)
-	 {
+	public void setBalance(double amount)
+	{
 	    balance = amount;
-    }*/
+    }
    
     public void setName(String owner)
 	 {
@@ -97,38 +92,17 @@ class BankAccount3
         balance = balance - amount;
     }
 	 
-	 //overloaded method.  charges a fee!
-	 public void withdraw(double amount, double fee) 
-	 {
-        balance = balance - amount - fee;
-    }
-	 
-	 public String setStatus()
-	 {
-		if (balance > 0 )
-		{
-			return ("Fuck all of you");
-		}
-		else if(balance < 0)
-		{
-			return("Overdrawn!");
-		}
-		else
-			return("You broke!");
-	 }
-	 
-	 
     public String toString()
     {
 		NumberFormat fmt = NumberFormat.getCurrencyInstance();
-	 	return (" acctNumber: "  + acctNumber +  " balance : " + fmt.format(balance)
+	 	return ("acctNumber: "  + acctNumber +  " balance : " + fmt.format(balance)
 			        + " name : " + name  );
 	 }
 	 
 	 //Class method to return the number of accounts created
 	 public static int getCount()
 	 {
-	 	return count;
+	 	return acctCount;
   	 }
 
 	

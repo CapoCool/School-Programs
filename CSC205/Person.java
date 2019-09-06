@@ -44,10 +44,17 @@ public class Person {
 	}
 	
 	public int calculateAge(int currentYr) {
+		int age = 0;
 		
+		if(birthYear == 0) {
+			
+			age = 0;
+			
+		} else {
+			
+		age = currentYr - birthYear;
 		
-		
-		int age = currentYr - birthYear;
+		}
 		
 		return age;
 		
