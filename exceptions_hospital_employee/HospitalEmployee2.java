@@ -1,4 +1,10 @@
-package ch4;
+/* Dillan Poorman
+ * CSC205
+ * 09/30/2019
+ * employee class
+ * 
+ */
+package exceptions_hospital_employee;
 //********************************************************************
 // Class Name: HospitalEmployee.java     Base class for Inheritance   
 // Authors: Lewis and Loftus and 	Patricia Baker
@@ -28,25 +34,44 @@ public class HospitalEmployee2
    //-----------------------------------------------------------------
    //  Sets up this hospital employee with default information.
    //-----------------------------------------------------------------
-   public HospitalEmployee2()
+   public HospitalEmployee2() 
    {
-      empName =  "Chris Smith";
-      empNumber = 9999;
-      hoursWorked = 0;
-      payRate =0;
+	  empName = "";
+	  empNumber = 0;
+	  hoursWorked = 0;
+      payRate = 0;
+      socSecNumber = "";
 		
 		hospitalEmployeeCount++;
 
    }
 	
 	//overloaded constructor.
-	public HospitalEmployee2(String eName, int eNumber, double hours, double pay, String socSecNumber)
+	public HospitalEmployee2(String eName, int eNumber, double hours, double pay, String socSecNumber) throws InvalidNameException, InvalidEmpNumberException, InvalidHoursWorkedException, InvalidPayRateException, InvalidSocSecException
 	{
-		this.empName = eName;
-		this.empNumber = eNumber;
-		this.hoursWorked = hours;
-		this.payRate = pay;
-		this.socSecNumber = socSecNumber;
+		
+		if(eName == null || eName == "") {
+			 throw new InvalidNameException();
+	  } else { this.empName = eName; }
+	  
+	  if(eNumber < 0) {
+		  throw new InvalidEmpNumberException(eNumber);
+	  } else { this.empNumber = eNumber;}
+	  
+	  if(hours > 0 || hours < 84) {
+		  throw new InvalidHoursWorkedException(hours);
+     } else { this.hoursWorked = hours; }
+	  
+	  if(pay < 0 || pay > 25) {
+		   throw new InvalidPayRateException(pay);
+	   } else { this.payRate = pay; }
+	  
+      int num = socSecNumber.trim().replaceAll(" +", "").length();
+	  
+	  if(num == 11 && socSecNumber.matches("^(?!000|666)[0-8][0-9]{2}-(?!00)[0-9]{2}-(?!0000)[0-9]{4}$") ) {
+		  this.socSecNumber = socSecNumber;
+		  
+	  } else { throw new InvalidSocSecException(socSecNumber); }
 		
 		hospitalEmployeeCount++;
 	
@@ -55,8 +80,12 @@ public class HospitalEmployee2
    //-----------------------------------------------------------------
    //  Sets the name for this employee.
    //-----------------------------------------------------------------
-   public void setEmpName (String eName)
+   public void setEmpName (String eName) throws InvalidNameException
    {
+	  if(eName == null || eName == "") {
+		  throw new InvalidNameException();
+	  }
+	  
       this.empName = eName;
    }
 
@@ -64,24 +93,33 @@ public class HospitalEmployee2
    //-----------------------------------------------------------------
    //  Sets the employee number for this employee.
    //-----------------------------------------------------------------
-   public void setEmpNumber (int eNumber)
+   public void setEmpNumber (int eNumber) throws InvalidEmpNumberException
    {
-      this.empNumber = eNumber;
+	  if(eNumber < 0) {
+		  throw new InvalidEmpNumberException(eNumber);
+	  }
+      	this.empNumber = eNumber;
    }
 
    //-----------------------------------------------------------------
    //  Sets the hours worked for this employee.
    //-----------------------------------------------------------------
-   public void setHoursWorked (double hours)
+   public void setHoursWorked (double hours) throws InvalidHoursWorkedException
    {
+	   if(hours < 0 || hours > 84) {
+			  throw new InvalidHoursWorkedException(hours);
+	   }
        this.hoursWorked = hours;
     }
 
    //-----------------------------------------------------------------
    //  Sets the pay rate  for this employee.
    //-----------------------------------------------------------------
-   public void setPayRate (double rate)
+   public void setPayRate (double rate) throws InvalidPayRateException
    {
+	   if(rate < 0 || rate > 25) {
+		   throw new InvalidPayRateException(rate);
+	   }
        this.payRate = rate;
    }
 
@@ -132,8 +170,11 @@ public class HospitalEmployee2
    //-----------------------------------------------------------------
    //  This adds or subtracts hours from the hoursWorked instance var.
    //-----------------------------------------------------------------
-   public void changeHoursWorked(double hours)
+   public void changeHoursWorked(double hours) throws InvalidHoursWorkedException
    {
+	  if(hours > 0 || hours < 84) {
+		throw new InvalidHoursWorkedException(hours);
+	  }
       hoursWorked = hoursWorked + hours;
    }
 
@@ -182,11 +223,19 @@ public class HospitalEmployee2
   
   }
   
-  public void setSocSecNumber(String socSecNumber) {
+  public void setSocSecNumber(String socSecNumber) throws InvalidSocSecException {
 	  
-	  this.socSecNumber = socSecNumber;
+	  int num = socSecNumber.trim().replaceAll(" +", "").length();
+	  
+	  if(num == 11 && socSecNumber.matches("^(?!000|666)[0-8][0-9]{2}-(?!00)[0-9]{2}-(?!0000)[0-9]{4}$") ) {
+		  this.socSecNumber = socSecNumber;
+		  
+	  } else { throw new InvalidSocSecException(socSecNumber); }
+	  
+	  
+	  
   }
- 
+
    //-----------------------------------------------------------------
    //  Returns a description of this employee as a string.
    //-----------------------------------------------------------------
