@@ -5,14 +5,7 @@
  * 
  */
 package exceptions_hospital_employee;
-//********************************************************************
-// Class Name: HospitalEmployee.java     Base class for Inheritance   
-// Authors: Lewis and Loftus and 	Patricia Baker
-// Brief Description:
-//            Defines a HospitalEmployee - base class or super class
-//          
-//
-//********************************************************************
+
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
