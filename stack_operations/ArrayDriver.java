@@ -1,5 +1,7 @@
 package stack_operations;
 
+import string_manipulation.Stack;
+
 /**Dillan Poorman
  * CSC205
  * 10/25/2019
